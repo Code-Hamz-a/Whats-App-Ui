@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatapp_clone/Widgets/uihelper.dart';
+import 'package:whatapp_clone/screens/OPT/optscreen.dart';
 
 class Loginscreen extends StatefulWidget {
   @override
@@ -122,8 +123,18 @@ class _LoginscreenState extends State<Loginscreen> {
           )
         ],
       ),
-      floatingActionButton: uiHelper.CustomButton(callback: (){}, buttonname: "Next"),
+      floatingActionButton: uiHelper.CustomButton(callback: (){
+        login(phoneController.text.toString());
+      }, buttonname: "Next"),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+  }
+
+  login(String phonenumber){
+    if(phonenumber==""){
+      return ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Enter Phone Number"),backgroundColor: Color(0XFF00A884),));
+    }else{
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>OPTScreen(phonenumber: phonenumber,)));
+    }
   }
 }
